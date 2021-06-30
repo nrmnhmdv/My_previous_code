@@ -1,0 +1,46 @@
+class Player:
+
+    def __init__(self):
+        self.hand = []
+        self.hand_value = 0
+        self.playing_hand = True
+
+    def draw_hand(self, deck):
+        for i in range(2):
+            card = deck.deal_card()
+            self.hand.append(card)
+
+
+    def display_hand(self):
+        print(" Player's hand : ")
+        for card in self.hand:
+            card.display_card()
+
+    def hit(self, deck):
+
+        get_card = deck.deal_card()
+        self.hand.append(get_card)
+
+    def get_hand_value(self):
+
+        self.hand_value = 0
+        ace_in_hand = False
+        for card in self.hand:
+            self.hand_value += card.value
+            if card.rank == 'A':
+                ace_in_hand = True
+        if self.hand_value > 21 and ace_in_hand:
+            self.hand_value -= 10
+        print(" Value : ", str(self.hand_value))
+
+
+    def update_hand(self,deck):
+
+        if self.hand_value < 21:
+            get_user_input = input(" Would you like to hit ?").lower()
+            if get_user_input == 'y':
+                self.hit(deck)
+            else:
+                self.playing_hand = False
+        else:
+            self.playing_hand = False
