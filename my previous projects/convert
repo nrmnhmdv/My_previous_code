@@ -1,0 +1,28 @@
+class convert:
+
+    welcome = " Welcome to the Binary/Hexadecimal Convert App "
+
+    def __init__(self):
+
+        self.max_value = 12
+        self.binary_values = []
+        self.hexadecimal_values = []
+
+    def convert(self):
+        for i in range(0,self.max_value):
+            self.binary_values.append(bin(i))
+            self.hexadecimal_values.append(hex(i))
+
+    def show_binary_value(self):
+        print("These are binary values : ")
+        for i in self.binary_values:
+            print(i)
+
+    def show_hexadecimal_value(self):
+        print("These are hexadecimal values : ")
+        for i in self.hexadecimal_values:
+            print(i)
+
+    @classmethod
+    def greetin(cls):
+        print(cls.welcome)
