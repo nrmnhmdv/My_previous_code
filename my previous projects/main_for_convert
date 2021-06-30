@@ -1,0 +1,19 @@
+from Convert import convert
+
+c = convert()
+c.greetin()
+
+running = True
+while running:
+    c.convert()
+
+    choice2 = input(" Binary /Hexadecimal ? ").lower()
+    if choice2 == 'b':
+        c.show_binary_value()
+    else:
+        c.show_hexadecimal_value()
+
+    choice = input(" Would you like to run the program again (y/n): ").lower()
+    if choice != 'y':
+        running=False
+        print(" Thank you for using my progam !!! ")
