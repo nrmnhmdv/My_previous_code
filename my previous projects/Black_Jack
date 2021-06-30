@@ -1,0 +1,47 @@
+from deck import Deck
+from dealer import Dealer
+from player import Player
+from game import Game
+from card import Card
+
+
+print(" Welcome to the Black Jack App !!! ")
+print(" Minimum bet can be 20$ ")
+input_money = int(input(" How much money would you like to place on the table ?  "))
+
+game = Game(input_money)
+playing = True
+
+while playing:
+
+    game_deck = Deck()
+    game_deck.build_deck()
+    game_deck.shuffle_deck()
+
+    player = Player()
+    dealer = Dealer()
+
+    game.display_money()
+    game.set_bet()
+
+    player.draw_hand(game_deck)
+    dealer.draw_hand(game_deck)
+
+    game.display_money_and_bet()
+    print(" The dealer is showing : ", dealer.hand[0].rank, " of ", dealer.hand[0].suit)
+
+    while player.playing_hand:
+
+        player.display_hand()
+        player.get_hand_value()
+        player.update_hand(game_deck)
+
+    dealer.hit(game_deck)
+    dealer.display_hand()
+
+    game.scoring(player.hand_value, dealer.hand_value)
+    game.payout()
+
+    if game.money < 20:
+        playing = False
+        print(" Thank you for using my App !!! ")
