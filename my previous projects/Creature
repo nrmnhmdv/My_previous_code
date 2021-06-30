@@ -1,0 +1,126 @@
+# First class
+import random
+
+class Creature:
+    def __init__(self, name):
+        self.name = name
+
+        self.hunger = 0
+        self.boredom = 0
+        self.tiredness = 0
+        self.dirtiness = 0
+
+        self.food = 2
+        self.is_sleeping = False
+        self.is_alive = True
+
+    def eat(self):
+
+        if self.food > 0:
+            self.food -= 1
+            self.hunger -= random.randint(1, 4)
+            print(" Thank you for a great meal !  ")
+        else:
+            print(" I have no food ")
+            if self.hunger<0:
+                self.hunger=0
+
+    def play(self):
+
+        random_integer = random.randint(0,2)
+        print(" Creature wants to play a game ! ")
+        print(self.name, " is thinking of a number 0,1 or 2 . ")
+
+        guess = int(input(" What is your guess ? : "))
+        if guess == random_integer:
+            print(" Correct !!! ")
+            self.boredom -= 3
+        else:
+            print(" Incorrect !!! ")
+            self.boredom -= 1
+
+        if self.boredom < 0:
+            self.boredom = 0
+
+
+    def sleep(self):
+
+        self.is_sleeping = True
+        self.tiredness -= 3
+        self.boredom -= 2
+
+        print(self.name, " is sleeping !!! ")
+
+        if self.tiredness < 0:
+            self.tiredness = 0
+
+        if self.boredom < 0:
+            self.boredom = 0
+
+
+    def awake(self):
+        random_integer = random.randint(0, 2)
+
+        if random_integer == 0:
+            print(self.name, " just woke up !!! ")
+            self.is_sleeping = False
+            self.boredom = 0
+        else:
+            print(self.name, " Won't wake up !!! ")
+            self.sleep()
+
+    def clean(self):
+        self.dirtiness = 0
+        print(self.name, " has taken  a bath ")
+
+    def forage(self):
+        food_found = random.randint(0, 4)
+        self.food += food_found
+        self.tiredness += 2
+        print(self.name, " found ", str(food_found))
+
+    def show_values(self):
+        print(" Name : ", self.name,
+              '\n', " Hunger : ", self.hunger,
+              '\n', " Boredom : ", self.boredom,
+              '\n', " Tiredness : ", self.tiredness,
+              '\n', " Dirtiness : ", self.dirtiness,
+              '\n', " Food inventory : ", self.food,)
+
+        if self.is_sleeping:
+            print(" Sleeping ")
+        else:
+            print(" Awake ")
+
+    def incriment_values(self, difficulty):
+
+        self.hunger += random.randint(0, difficulty)
+        self.dirtiness += random.randint(0, difficulty)
+
+        if self.is_sleeping == False:
+
+            self.boredom += random.randint(0, difficulty)
+            self.tiredness += random.randint(0, difficulty)
+
+        self.dirtiness += random.randint(0, difficulty)
+
+    def kill(self):
+
+        if self.hunger >= 10:
+            print(" Creature starved to death ")
+            self.is_alive = False
+
+        elif self.dirtiness >= 10:
+            print(" Creature suffered an infection and died ")
+            self.is_alive = False
+
+        elif self.boredom >= 10:
+
+            self.boredom = 10
+            print(" Creature is bored and falling asleep !!! ")
+            self.is_sleeping = True
+
+        elif self.tiredness >= 10:
+            self.tiredness = 10
+            print(" Creature is sleepy and falling asleep  ")
+            self.is_sleeping = True
