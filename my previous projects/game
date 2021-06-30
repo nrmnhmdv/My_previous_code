@@ -1,0 +1,72 @@
+class Game:
+
+    def __init__(self, money):
+        self.money = money
+        self.bet = 20
+        self.winner = ''
+
+    def set_bet(self):
+        betting = True
+        while betting:
+
+            bet = int(input(" What would you like to bet  (min = 20) : "))
+
+            if bet < 20:
+                bet = 20
+
+            if bet > self.money:
+                print(" Can't afford the bet ")
+
+            else:
+                self.bet = bet
+                betting = False
+
+    def scoring(self, p_value, d_value):
+        if p_value == 21:
+
+            print(" They got Black Jack , You win")
+            self.winner = 'p'
+
+        elif d_value == 21:
+
+            print(" The Dealer  got Black Jack ")
+            self.winner = 'd'
+
+        elif p_value > 21:
+
+            print(" The player went over 21. You lose !!! ")
+            self.winner = 'd'
+
+        elif d_value > 21:
+            print(" The dealer went over 21 . You win !!! ")
+            self.winner = 'p'
+
+        else:
+
+            if p_value > d_value:
+
+                print(" Summary ", '\n', " Dealer : ", d_value, " You win !!! ")
+                self.winner = 'p'
+
+            elif d_value > p_value:
+                print(" Summary ", '\n', " Dealer gets ", d_value, " You loose.")
+                self.winner = 'd'
+            else:
+                print(" It was a tie ")
+                self.winner = 'tie'
+
+
+    def payout(self):
+
+        if self.winner == 'p':
+            self.bet += self.money
+
+        elif self.winner == 'd':
+            self.bet -= self.money
+
+
+    def display_money(self):
+        print(" Money =  ", self.money, "$")
+
+    def display_money_and_bet(self):
+        print(" Cureent Money = ", self.money, '\n', " Current Bet = ", self.bet)
