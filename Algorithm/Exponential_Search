@@ -1,0 +1,31 @@
+target = int(input(" Enter a number  : "))
+n = len(array)
+
+def exponential_search(array,n,target):
+    if array[0] == target:
+        return 0
+    i = 1
+    while i < n and array[i] <= target:
+        i = i*2
+
+    return binary_search(array, i/2, min(i, n-1), target)
+
+
+
+def binary_search(array, l , r, target):
+    if r >= l:
+        mid = int(l+(r-l)/2)
+
+        if array[mid] == target:
+            return mid
+
+        if array[mid] > target:
+            return binary_search(array, l, mid-1, target)
+
+        return binary_search(array, mid+1, r, target)
+
+    return -1
+
+
+result = exponential_search(array, n, target)
+print(result)
