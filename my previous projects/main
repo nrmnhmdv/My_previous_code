@@ -1,0 +1,33 @@
+from user import User
+
+user = User()
+
+try:
+    user.name = input(" Enter your name : ")
+except:
+    print("Adi duzgun daxil edin  : ")
+
+user.surname = input(" Enter your Surname : ")
+user.user_name = input(" Please enter your User Name : ")
+user.password = input(" Please enter your Password : ")
+user.mail = input(" Please enter your Mail Anderss : ")
+user.job_title = input(" Please enter your Job Title : ")
+
+
+user.show_info()
+
+#User.add_employees(employee=user.name.title())
+#user.show_employees()
+#user.the_number_of_employees()
+
+#new_password=input(" Please enter  your  new password : ")
+
+#user.change_pasword(new_password)
+
+#user.show_info()
+
+#your_skill = input(" Your new skill ")
+
+#user.add_skill(your_skill)
+
+#user.show_skill()
