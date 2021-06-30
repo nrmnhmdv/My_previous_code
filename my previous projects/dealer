@@ -1,0 +1,47 @@
+import time
+
+class Dealer:
+    def __init__(self):
+
+        self.hand = []
+        self.hand_value = 0
+        self.playing_hand = True
+
+
+    def draw_hand(self, deck):
+        for i in range(2):
+            card = deck.deal_card()
+            self.hand.append(card)
+
+
+    def display_hand(self):
+        input("\n Press enter ti reveal thr dealer's hand . ")
+
+        for card in self.hand:
+            card.display_card()
+            time.sleep(1)
+
+
+    def hit(self, deck):
+
+        self.get_hand_value()
+
+        while self.hand_value < 17:
+            card = deck.deal_card()
+            self.hand.append(card)
+            self.get_hand_value()
+        print("\n Dealer have  : ", str(len(self.hand)), " cards")
+
+
+    def get_hand_value(self):
+
+        self.hand_value = 0
+        ace_in_hand = False
+
+        for card in self.hand:
+            self.hand_value += card.value
+
+            if card.rank == 'A':
+                ace_in_hand = True
+        if self.hand_value > 21 and ace_in_hand:
+            self.hand_value -= 10
